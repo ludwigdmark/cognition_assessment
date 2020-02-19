@@ -1,0 +1,71 @@
+<form method="POST" action="/ticketing/" id="ticket_form">
+    <input type="hidden" name="<?=$this->site_data->csrf->name;?>" value="<?=$this->site_data->csrf->hash;?>" />
+    
+
+    <div class="form-row">
+
+      <div class="form-group col-sm-3">
+        <label for="inputAddress">Full Name</label>
+        <input name="fullname" type="text" class="form-control" id="fullname_input" placeholder="Full Name" required>
+        <small>First and last name</small>
+      </div>
+      <div class="form-group col-sm-3">
+        <label for="inputEmail4">Email</label>
+        <input name="email" type="email" class="form-control" id="email_input" placeholder="Email" required>
+        <small>Valid emails only</small>
+      </div>
+      <div class="form-group col-sm-3">
+        <label for="inputPassword4">Cell</label>
+        <input name="cell" type="tel" class="form-control" id="cell_input" placeholder="Cell" pattern="[0]{1}[1-9]{1}[0-9]{8}" required>
+        <small>eg. 082 425 9875</small>
+      </div>
+      <div class="form-group col-sm-3">
+        <label for="exampleFormControlSelect1">Ticket Type</label>
+        <select name="type" class="form-control" id="type_input" required>
+          <option value="Sales">Sales</option>
+          <option value="Accounts">Accounts</option>
+          <option value="IT">IT</option>
+        </select>
+        <small>Select area most relevant for this ticket</small>
+      </div>
+      <div class="form-group col-sm-12">
+        <label for="exampleFormControlSelect1">Ticket Status</label>
+        <select name="status" class="form-control" id="status_input" required>
+          <option value="Opened">Opened</option>
+          <option value="Pending">Pending</option>
+          <option value="Closed">Closed</option>
+        </select>
+        <small>Select area most relevant for this ticket</small>
+      </div>
+
+    </div>
+
+    <div class="form-row">
+
+      <div class="form-group col-sm-6">
+
+        <div class="form-row">
+      
+          <div class="form-group col-sm-12">
+            <label for="exampleFormControlTextarea1">Describe the challenge</label>
+            <textarea name="body" class="form-control" id="body_input" rows="3" required></textarea>
+            <small>Taking the time to describe your challenge with more detail helps us resolve the issue in less time.</small>
+          </div>
+          
+        </div>
+        
+      </div>  
+
+      <div class="form-group col-sm-6">
+
+        <div class="form-group col-md-12">
+            <label for="inputAddress">Location</label>
+            <input name="location" type="text" class="form-control" id="location_input" placeholder="Type your address here..." onclick="getLocationConstant()">
+            <small>Allow your browser to access your location to continue submitting this ticket</small>
+            <iframe width="100%" height="0" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" id="embedded_map"></iframe>
+        </div>
+        
+      </div>  
+
+    <button type="submit" class="btn btn-primary" id="form_complete">Submit Ticket</button>
+  </form>  

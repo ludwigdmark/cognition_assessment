@@ -1,0 +1,90 @@
+
+    <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
+        <a class="navbar-brand"><?= $this->site_data->app_title ?></a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+      
+        <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+              <a class="nav-link"><?= $this->site_data->page_name ?> <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="style_dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Style</a>
+                <div class="dropdown-menu" aria-labelledby="style_dropdown">
+                    <a class="dropdown-item style-option">Cerulean</a>
+                    <a class="dropdown-item style-option">Litera</a>
+                    <a class="dropdown-item style-option">Materia</a>
+                    <a class="dropdown-item style-option">Cosmo</a>
+                    <a class="dropdown-item style-option">Sandstone</a>
+                    <a class="dropdown-item style-option">Flatly</a>
+                    <a class="dropdown-item style-option">Lumen</a>
+                    <a class="dropdown-item style-option">Minty</a>
+                    <a class="dropdown-item style-option">Simplex</a>
+                    <a class="dropdown-item style-option">United</a>
+                    <a class="dropdown-item style-option">Journal</a>
+                    <a class="dropdown-item style-option">Lux</a>
+                    <a class="dropdown-item style-option">Pulse</a>
+                    <a class="dropdown-item style-option">Sketchy</a>
+                    <a class="dropdown-item style-option">Spacelab</a>
+                    <a class="dropdown-item style-option">Yeti</a>
+                </div>
+              </li>
+          </ul>
+          <ul class="navbar-nav my-2 my-lg-0">
+            <li class="nav-item">
+                <a class="nav-link" href="/complexquery">
+                    <i class="fas fa-star"></i>
+                    Complex Query
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/logic">
+                    <i class="fas fa-star"></i>
+                    Logic Assessment
+                </a>
+            </li>
+            <?php if ($this->session->userdata('loggedin')) { ?>
+                <li class="nav-item">
+                    <a class="nav-link" href="/ticketing/new">
+                        <i class="fas fa-clipboard"></i>
+                        New Ticket
+                    </a>
+                </li>
+                <?php if ($this->session->userdata('usertype') == "Management") { ?>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/ticketing">
+                            <i class="fas fa-copy"></i>
+                            Tickets
+                        </a>
+                    </li>
+                <?php } ?>
+                <li class="nav-item">
+                    <a class="nav-link" href="/user/profile">
+                        <i class="fas fa-<?=$this->session->userdata('icon');?>"></i>
+                        <?=$this->session->userdata('fullname');?>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/user/logout">
+                        <i class="fas fa-sign-out-alt"></i>
+                        Logout
+                    </a>
+                </li>
+            <?php } else { ?>
+                <li class="nav-item">
+                    <a class="nav-link" href="/user/login">
+                        <i class="fas fa-sign-in-alt"></i>
+                        Log In
+                    </a>
+                </li>
+            <?php } ?>
+          </ul>
+        </div>
+      </nav>
+
+      <script>console.log('<?=json_encode($this->session->userdata);?>')</script>
+
+
+      

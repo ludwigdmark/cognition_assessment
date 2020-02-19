@@ -1,0 +1,72 @@
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+ 
+
+<script src="https://unpkg.com/bootstrap-datepicker@1.9.0/dist/js/bootstrap-datepicker.min.js"></script>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/pdfmake.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/vfs_fonts.js"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/v/bs4/jszip-2.5.0/dt-1.10.20/b-1.6.1/b-colvis-1.6.1/b-flash-1.6.1/b-html5-1.6.1/b-print-1.6.1/r-2.2.3/datatables.min.js"></script>
+
+<script>
+    var cur_style = $("#bootswatch-link").attr("href").split("/")[4];
+    $(".style-option").each((i, e)=>{
+        if (cur_style.toLowerCase() == $(e).text().toLowerCase()) {
+            $(e).addClass("active");
+        }
+    });
+    $(".style-option").on("click", (e)=>{
+        cur_style = $("#bootswatch-link").attr("href").split("/")[4];
+        $("#bootswatch-link").attr("href", $("#bootswatch-link").attr("href").replace(cur_style, $(e.target).text().toLowerCase()));
+    });
+</script>
+
+<script>
+
+    
+$(document).ready(()=>{
+    
+    
+    
+        $("#min").datepicker({ onSelect: function () { table.draw(); }, changeMonth: true, changeYear: true, format: 'yyyy-mm-dd' });
+        $("#max").datepicker({ onSelect: function () { table.draw(); }, changeMonth: true, changeYear: true, format: 'yyyy-mm-dd' });
+        var table = $('.datatable').DataTable( {
+            dom: 'Bfrtip',
+            buttons: [
+                'colvis', 'copy', 'excel', 'pdf'
+            ],
+            responsive: true,
+            stateSave: true
+        });
+ 
+        // Event listener to the two range filtering inputs to redraw on input
+        $('#min, #max').change(function () {
+            table.draw();
+        });
+        
+    });
+
+</script>
+
+<script type="text/javascript">
+
+    function getLocationConstant() {
+      if (document.getElementById("location_input").value.length < 3) {
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(onGeoSuccess, onGeoError);
+        } else {
+            alert("Your browser or device doesn't support Geolocation");
+        }
+      }
+    }
+    function onGeoSuccess(event) {
+        $("#embedded_map").css("height", 170).css("margin-top", 10);        
+        $("#embedded_map").attr("src", "//maps.google.com/maps?q="+event.coords.latitude+","+event.coords.longitude+"&hl=es&z=10&output=embed");
+        $("#location_input").val(event.coords.latitude + ", " + event.coords.longitude);
+    }
+    function onGeoError(event) {
+        alert("Error code " + event.code + ". " + event.message);
+    }
+
+</script>
